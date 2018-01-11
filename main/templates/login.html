@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<title>Вход</title>
+
+    {% load static %}
+    <!--<link rel="stylesheet" type="text/css" href="{% static 'container_centered.css' %}">-->
+    <link rel="icon" type="image/ico" href="{% static 'favicon.ico' %}">
+
+    <style>
+        .container_centered {
+            position: absolute;
+            margin: auto;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+    </style>
+
+</head>
+
+<body>
+<!--
+	{# Load the tag library #}
+	{% load bootstrap3 %}
+	{# Load CSS and JavaScript #}
+	{% bootstrap_css %}
+	{% bootstrap_javascript %}
+
+	{# Display django.contrib.messages as Bootstrap alerts #}
+	{% bootstrap_messages %}
+	{# Display a form #}
+-->
+    <div class="container_centered" style="width: 270px; height: 300px;">
+        <form method="POST">
+            {% csrf_token %}
+
+            <h2>Вход</h2>
+
+			<table>
+            	{{ form.as_table }}
+
+                <tr>
+                    <td></td>
+                    <td>
+                        <button type="submit" style="margin-top:20px;">Войти</button>
+                        <a href="/registration" style="float: right; margin-top:20px;">Регистрация</a>
+                    </td>
+                </tr>
+			</table>
+
+        </form>
+    </div>
+
+</body>
+</html>

@@ -15,7 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
+from main import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-]
+    path('', views.CourseListView.as_view()),
+    path('registration', views.RegisterFormView.as_view()),
+    path('login', views.LoginFormView.as_view()),
+    path('logout', views.LogoutFormView.as_view()),
+] + (static(settings.STATIC_URL, document_root=settings.STATIC_URL)
+  +  static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT))
