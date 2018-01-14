@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'user_line.css' %}">
+</head>
+
+<body>
+    <div style="visibility: hidden;">_</div>
+    <div class="user_line">
+        {% if user.is_authenticated %}
+            <span class="link_btn">{{ user }}</span>
+            <a href="/logout" class="link_btn">logout</a>
+        {% else %}
+            <a href="/login" class="link_btn">login</a>
+            <a href="/registration" class="link_btn">register</a>
+        {% endif %}
+    </div>
+</body>
+</html>

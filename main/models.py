@@ -6,11 +6,11 @@ from django.conf import settings
 class Course(models.Model):
     name = models.CharField(max_length=32)
     description = models.CharField(max_length=512, null=True)
-    picture = models.ImageField(upload_to='pictures', null=True, blank=True)
+    picture = models.ImageField(upload_to='pictures', default='pictures/nopic.png', null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
 
     def get_absolute_url(self):
-        return reverse('courses', args=[str(self.id)])
+        return reverse('course', args=[str(self.id)])
 
 
 class Subscription(models.Model):

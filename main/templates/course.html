@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Course</title>
+
+    {% load static %}
+    <link rel="icon" type="image/ico" href="{% static 'pictures/favicon.ico' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'course_.css' %}">
+
+</head>
+
+<body>
+    {% include 'user_line.html' %}
+
+    <div class="container">
+        <img class="picture" src="{{ course.picture.url }}">
+        <div>
+            <div class="date">{{ course.created.date }}</div>
+            <h1>{{ course.name }}</h1>
+            <div>{{ course.description }}</div>
+        </div>
+    </div>
+</body>

@@ -5,19 +5,8 @@
 	<title>Вход</title>
 
     {% load static %}
-    <!--<link rel="stylesheet" type="text/css" href="{% static 'container_centered.css' %}">-->
+    <link rel="stylesheet" type="text/css" href="{% static 'container_centered.css' %}">
     <link rel="icon" type="image/ico" href="{% static 'favicon.ico' %}">
-
-    <style>
-        .container_centered {
-            position: absolute;
-            margin: auto;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-        }
-    </style>
 
 </head>
 
@@ -33,7 +22,7 @@
 	{% bootstrap_messages %}
 	{# Display a form #}
 -->
-    <div class="container_centered" style="width: 270px; height: 300px;">
+    <div class="container_centered">
         <form method="POST">
             {% csrf_token %}
 

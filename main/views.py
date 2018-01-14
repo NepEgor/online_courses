@@ -1,6 +1,6 @@
 from django.http import HttpResponseRedirect
 from django.views import View
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from django.views.generic.edit import FormView
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout
@@ -9,8 +9,11 @@ from main.models import Course
 
 class CourseListView(ListView):
     model = Course
+    paginate_by = 2
     context_object_name = 'course_list'
+    template_name = 'course_list.html'
 
+'''
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
 
@@ -21,6 +24,16 @@ class CourseListView(ListView):
             context['user_atribs'] = '<a href="/login" class="link_btn">login</a>' \
                                      '<a href="/registration" class="link_btn">register</a>'
         return context
+'''
+
+class CourseDetailView(DetailView):
+    model = Course
+    context_object_name = 'course'
+    template_name = 'course.html'
+
+    def get_object(self):
+        object = super(CourseDetailView, self).get_object()
+        return object
 
 
 class RegisterFormView(FormView):
