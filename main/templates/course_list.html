@@ -5,39 +5,35 @@
 	<title>List of Online Courses</title>
 
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'course_list_.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'course_list__.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'no_highlight_link.css' %}">
     <link rel="icon" type="image/ico" href="{% static 'pictures/favicon.ico' %}">
 
 </head>
 
 <body>
-    <!--<div style="float: right; margin-right:20px">
-        {{ user_atribs|safe }}
-    </div>-->
-
     {% include 'user_line.html' %}
 
     <h2>Online Courses</h2>
 
-    <div style="margin-right:40px">
-        <!--<ul style="list-style-type:none;">-->
-            {% for course in course_list %}
-                <a class="no_highlight_link" href="{% url 'course' course.id %}">
-                    <div class="list_entry">
-
-                        <img class="list_entry_picture" src="{{ course.picture.url }}">
-                        <div class="list_entry_header"> {{ course.name }} </div>
-                        <!--<div class="list_entry_description">
-                            <div style="float: right;"> {{ course.created.date }}</div>
-                            <div>{{ course.description }}</div>
-                        </div>-->
-
-                    </div>
-                </a>
-            {% endfor %}
-        <!--</ul>-->
+    <div style="margin-right:40px;">
+        {% for course in course_list %}
+            <a class="no_highlight_link" href="{% url 'course' course.id %}">
+                <div class="list_entry">
+                    <img class="list_entry_picture" src="{{ course.picture.url }}">
+                    <div class="list_entry_header"> {{ course.name }} </div>
+                </div>
+            </a>
+        {% endfor %}
     </div>
+
+    {% if user.is_authenticated %}
+        <a href="/course/create" class="no_highlight_link">
+            <div class="button_add_course">
+                +
+            </div>
+        </a>
+    {% endif %}
 
     {% if paginator.num_pages > 1 %}
         <ul id="page_navigation">

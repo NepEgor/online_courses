@@ -15,7 +15,7 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-MEDIA_ROOT = 'D:\\files\\py\\online_courses\\main\\static\\loaded'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'main\\static\\loaded')
 
 
 # Quick-start development settings - unsuitable for production
@@ -28,7 +28,6 @@ SECRET_KEY = '6w&_)-r)b#l-8lich((t8sp#oxwy*!#60l%g59g@b5l#-x%dv2'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 

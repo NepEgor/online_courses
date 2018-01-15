@@ -1,0 +1,27 @@
+
+.container {
+    display: inline-block;
+    margin-left: 30px;
+    margin-top: 100px;
+    height: 300px;
+    width: 80%
+}
+
+.picture {
+    float: left;
+    width: 300px;
+    height: 300px;
+    margin-right: 10px;
+}
+
+.date {
+    float: right;
+    margin-right: 20px;
+}
+
+.subscribe_block {
+    float: right;
+    width: 90px;
+    margin-top: 40px;
+    margin-right: 80px;
+}

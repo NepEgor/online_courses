@@ -27,6 +27,8 @@ urlpatterns += [
     url(r'^login', views.LoginFormView.as_view()),
     url(r'^logout', views.LogoutFormView.as_view()),
     url(r'^registration', views.RegisterFormView.as_view()),
+    url(r'^course/create', views.CourseCreate.as_view()),
+    url(r'^sub_usr_lst/(?P<Course_id>\d+)', views.SubscriptionListView.as_view(), name='sub_usr_lst'),
     url(r'^page/(?P<page>\d+)', views.CourseListView.as_view(), name='page'),
     url(r'^course/(?P<pk>\d+)', views.CourseDetailView.as_view(), name='course'),
     url(r'^', views.CourseListView.as_view()),

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Course</title>
+
+    {% load static %}
+    <link rel="icon" type="image/ico" href="{% static 'pictures/favicon.ico' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'course_create.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'container_centered.css' %}">
+
+</head>
+
+<body>
+    {% include 'user_line.html' %}
+
+    <div class="container_centered">
+        <h2>Create Course</h2>
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <table>
+                <tr>
+                    <td><label for="id_name">Name:</label></td>
+                    <td><input type="text" name="name" maxlength="32" required id="id_name" /></td>
+                </tr>
+                <tr>
+                    <td><label for="id_description">Description:</label></td>
+                    <td><textarea name="description" maxlength="512" required id="id_description" rows="10" cols="52"></textarea></td>
+                </tr>
+                <tr>
+                    <td><label for="id_picture">Picture:</label></td>
+                    <td><input type="file" name="picture" id="id_picture" /></td>
+                </tr>
+                <tr>
+                    <td><input name="User" type="hidden" value="{{ user.id }}"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><button type="submit">Save</button></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+
+</body>

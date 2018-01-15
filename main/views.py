@@ -1,39 +1,65 @@
 from django.http import HttpResponseRedirect
 from django.views import View
 from django.views.generic import ListView, DetailView
-from django.views.generic.edit import FormView
+from django.views.generic.edit import CreateView, FormView
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.forms.models import ModelForm
 from django.contrib.auth import login, logout
-from main.models import Course
+from main.models import Course, Subscription
 
 
 class CourseListView(ListView):
     model = Course
-    paginate_by = 2
+    paginate_by = 10
     context_object_name = 'course_list'
     template_name = 'course_list.html'
 
-'''
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        if(self.request.user.is_authenticated):
-            context['user_atribs'] = '<span class="link_btn">' + self.request.user.username + '</span>' \
-                                     '<a href="/logout" class="link_btn">logout</a>'
-        else:
-            context['user_atribs'] = '<a href="/login" class="link_btn">login</a>' \
-                                     '<a href="/registration" class="link_btn">register</a>'
-        return context
-'''
 
 class CourseDetailView(DetailView):
     model = Course
     context_object_name = 'course'
     template_name = 'course.html'
 
-    def get_object(self):
-        object = super(CourseDetailView, self).get_object()
-        return object
+    def post(self, request, **kwargs):
+        if len(Subscription._default_manager.filter(
+                Course_id=kwargs.get('pk'),
+                User_id=request.user.id)
+            ) == 0:
+                new_sub = Subscription(Course=self.get_object(), User=request.user)
+                new_sub.save()
+        return super().get(request)
+
+
+class SubscriptionListView(ListView):
+    model = Subscription
+    context_object_name = 'subscription_list'
+    template_name = 'subscription_list.html'
+
+    def get_queryset(self):
+        return self.model._default_manager.filter(Course_id=self.kwargs.get('Course_id'))[:10]
+
+    def get(self, request, **kwargs):
+        return super().get(request)
+
+
+class CourseForm(ModelForm):
+    class Meta:
+        model = Course
+        exclude = ['id']
+
+
+class CourseCreate(CreateView):
+    form_class = CourseForm
+    template_name = 'course_create.html'
+
+    def post(self, request):
+        print(request.FILES)
+        return super().post(request)
+
+    def get(self, request):
+        if not self.request.user.is_authenticated:
+            return HttpResponseRedirect('/')
+        return super().get(request)
 
 
 class RegisterFormView(FormView):

@@ -35,3 +35,13 @@
 .active {
     background: lightblue;
 }
+
+.button_add_course {
+    float: right;
+    margin-right: 40px;
+    width: 24px;
+    height: 24px;
+    border: 1px solid black;
+    border-radius: 12px;
+    text-align: center;
+}
